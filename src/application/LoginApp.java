@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 public class LoginApp extends Application {
 	
-	private Scene scene;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -18,7 +17,7 @@ public class LoginApp extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
 			loader.setController(new LoginController());
 			Pane root = loader.load();
-			scene = new Scene(root,600,400);
+			Scene scene = new Scene(root,600,400);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();

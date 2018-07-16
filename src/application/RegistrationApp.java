@@ -2,7 +2,7 @@ package application;
 
 import java.io.IOException;
 
-import controller.LoginController;
+import controller.RegistrationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ public class RegistrationApp extends Application {
 	public void start(Stage stage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Registration.fxml"));
-			loader.setController(new LoginController());
+			loader.setController(new RegistrationController());
 			Pane root = loader.load();
 			Scene scene = new Scene(root,600,400);
 			stage.setScene(scene);

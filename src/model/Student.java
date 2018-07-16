@@ -12,4 +12,18 @@ public class Student {
 		this.grade=grade;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+	
+	
+
 }

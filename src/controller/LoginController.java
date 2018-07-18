@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
 			else{
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText(null);
-				alert.setContentText("Username and Password Is Not Correct");
+				alert.setContentText("Username and Password are not Correct");
 				alert.show();			
 			}
 		} catch (SQLException e) {

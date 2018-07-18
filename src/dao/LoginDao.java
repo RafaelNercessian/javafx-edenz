@@ -14,8 +14,6 @@ public class LoginDao {
 		prepareStatement.setString(1, username);
 		prepareStatement.setString(2, password);
 		ResultSet resultSet = prepareStatement.executeQuery();
-		prepareStatement.close();
-		connection.close();
 		return resultSet.first();
 	}
 

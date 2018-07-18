@@ -10,6 +10,8 @@ import dao.ConnectionManager;
 import dao.StudentDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +32,9 @@ public class RegistrationController implements Initializable {
 
 	@FXML
 	private TextField grade;
+	
+	@FXML
+	private TextField search;
 
 	@FXML
 	private Button registerButton;
@@ -65,16 +70,47 @@ public class RegistrationController implements Initializable {
 		tableColumnStudent.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tableColumnSubject.setCellValueFactory(new PropertyValueFactory<>("subject"));
 		tableColumnGrade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-		table.setItems(data);
+		
+		
+		 FilteredList<Student> filteredData = new FilteredList<>(data, p -> true);
+		 
+		 search.textProperty().addListener((observable, oldValue, newValue) -> {
+	            filteredData.setPredicate(student -> {
+	                if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+
+	                String lowerCaseFilter = newValue.toLowerCase();
+	                System.out.println(lowerCaseFilter);
+
+	                if (student.getName().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches first name.
+	                } else if (student.getName().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches last name.
+	                }
+	                return false; // Does not match.
+	            });
+	        });
+		 
+		 // 3. Wrap the FilteredList in a SortedList. 
+	        SortedList<Student> sortedData = new SortedList<>(filteredData);
+
+	        // 4. Bind the SortedList comparator to the TableView comparator.
+	        sortedData.comparatorProperty().bind(table.comparatorProperty());
+	        
+	        table.setItems(sortedData);
 	}
 
 	@FXML
 	public void register(ActionEvent event) {
 		Student student = new Student(studentName.getText(), subject.getText(), grade.getText());
 		StudentDao.register(student);
+		studentName.setText("");
+		subject.setText("");
+		grade.setText("");
 		table.refresh();
 		data.add(student);
 		table.setItems(data);
 	}
-
+	
 }

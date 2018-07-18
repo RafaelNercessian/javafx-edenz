@@ -13,8 +13,6 @@ public class Student {
 		this.grade = grade;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
